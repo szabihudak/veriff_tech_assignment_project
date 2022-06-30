@@ -1,0 +1,36 @@
+{
+  "name": "techn_assignment",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "debug": "cypress run --browser chrome --headed --no-exit",
+    "execute-on-chrome": "cypress run --browser chrome --headed",
+    "execute-on-firefox": "cypress run --browser firefox --headed",
+    "execute-on-edge": "cypress run --browser edge --headed",
+    "execute-on-chrome-headless": "cypress run --browser chrome",
+    "execute-on-firefox-headless": "cypress run --browser firefox",
+    "execute-on-edge-headless": "cypress run --browser edge"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cucumber-html-reporter": "^5.5.0",
+    "cypress": "^9.7.0",
+    "cypress-cucumber-preprocessor": "^4.3.1"
+  },
+  "cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinitions": true,
+    "cucumberJson": {
+      "generate": true,
+      "outputFolder": "cypress/cucumber-json",
+      "filePrefix": "",
+      "fileSuffix": ".cucumber"
+    }
+  },
+  "dependencies": {
+    "save-dev": "0.0.1-security"
+  },
+  "description": ""
+}
