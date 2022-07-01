@@ -3,14 +3,19 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "debug": "cypress run --browser chrome --headed --no-exit",
+    "execute-on-chrome-detailed-report": "cypress run --browser chrome --headed --no-exit",
+    "execute-on-firefox-detsiled-report": "cypress run --browser firefox --headed --no-exit",
+    "execute-on-edge-detiled-report": "cypress run --browser edge --headed --no-exit",
     "execute-on-chrome": "cypress run --browser chrome --headed",
     "execute-on-firefox": "cypress run --browser firefox --headed",
     "execute-on-edge": "cypress run --browser edge --headed",
     "execute-on-chrome-headless": "cypress run --browser chrome",
     "execute-on-firefox-headless": "cypress run --browser firefox",
-    "execute-on-edge-headless": "cypress run --browser edge"
+    "execute-on-edge-headless": "cypress run --browser edge",
+    "generate-html-report": "node cucumber_html_generator.js",
+    "execute-on-chrome-report-cucumber": "npm-run-all -s -c execute-on-chrome generate-html-report",
+    "execute-on-firefox-report-cucumber": "npm-run-all -s -c execute-on-firefox generate-html-report",
+    "execute-on-edge-report-cucumber": "npm-run-all -s -c execute-on-edge generate-html-report"
   },
   "keywords": [],
   "author": "",
@@ -18,13 +23,17 @@
   "devDependencies": {
     "cucumber-html-reporter": "^5.5.0",
     "cypress": "^9.7.0",
-    "cypress-cucumber-preprocessor": "^4.3.1"
+    "cypress-cucumber-attach-screenshots-to-failed-steps": "^1.0.0",
+    "cypress-cucumber-preprocessor": "^4.3.1",
+    "cypress-mochawesome-reporter": "^3.2.0",
+    "multiple-cucumber-html-reporter": "^1.21.4",
+    "npm-run-all": "^4.1.5"
   },
   "cypress-cucumber-preprocessor": {
     "nonGlobalStepDefinitions": true,
     "cucumberJson": {
       "generate": true,
-      "outputFolder": "cypress/cucumber-json",
+      "outputFolder": "cypress/reports/cucumber-json",
       "filePrefix": "",
       "fileSuffix": ".cucumber"
     }
