@@ -55,3 +55,13 @@ After the report creation you will find the BDD Cucumber HTML report in the ./re
 
 ###Bugs in the report
 Sorting is not working with problem_user
+
+###Test Approach
+
+I tried to cover most part of the application with max 5 automated test cases, so I defined E2E user flows which go through the application, insted of testing each part/page separately. These flows, test cases are:
+ - Happy Flow - User select/deselect inventory items and complete the checkout process. With this test case I check if the main functionality of the application is working as we expected.
+ - Alternative ways and cancellations during the checkout process. I chose state transition test design methodology, to walk through every possible state transition of the application, and chek if it is working.
+ - Sorting in the inventory. I defined separate test case for sorting on the inventory page, this is not a mandatory part of the checkout flow. Here I test with different kind of users, to check if everything can work as expected for each user.
+ - Error handling and validations. Separate test for error handling and validations
+ - Basic functionalities such as login, logout, reset application were tested as a part of other tests
+ 

@@ -1,6 +1,6 @@
 Feature: Main FLows
 
-  Scenario: Happy FLow - User select/deselect inventory items and complete the check out process
+  Scenario: Happy Flow - User select/deselect inventory items and complete the checkout process
     Given  I log in as standard_user user with secret_sauce password successful
     And    I check if the shopping cart badge shows 0 selected element
     # Add/remove items to/from the cart from the inventory
@@ -67,10 +67,9 @@ Feature: Main FLows
       | user_name               | password     |
       | standard_user           | secret_sauce |
       | problem_user            | secret_sauce |
-      | performance_glitch_user | secret_sauce |
 
 
-  Scenario: Error handlings and validations
+  Scenario: Error handling and validations
     #Check the validations on the login page
     Given I try to log in as NULL user with NULL password
     And   I check if error message Epic sadface: Username is required appears
