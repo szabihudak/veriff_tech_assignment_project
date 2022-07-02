@@ -18,9 +18,9 @@ before(function () {
 
 afterEach(function () {
     inventoryPage.getMenuButton().click({force: true})
-    inventoryPage.getResetAppMenuPoint().should('have.text', 'Reset App State')
+    inventoryPage.getResetAppMenuPoint().should('have.text', init.button_titles.RESET_APP_STATE)
         .click({force: true})
-    inventoryPage.getLogoutMenuPoint().should('have.text', 'Logout')
+    inventoryPage.getLogoutMenuPoint().should('have.text', init.button_titles.LOGOUT)
         .click({force: true})
 });
 
@@ -29,9 +29,9 @@ Given(`I log in as {} user with {} password successful`, (user, password) => {
         .type(user)
     loginPage.getPasswordInputField().clear()
         .type(password)
-    loginPage.getLoginButton().should('have.value', 'Login')
+    loginPage.getLoginButton().should('have.value', init.button_titles.LOGIN)
         .click()
-    commonPage.getPageTitle().should('have.text', 'Products')
+    commonPage.getPageTitle().should('have.text', init.page_titles.PRODUCTS)
 })
 
 Given(`I try to log in as {} user with {} password`, (user, password) => {
@@ -47,16 +47,16 @@ Given(`I try to log in as {} user with {} password`, (user, password) => {
         loginPage.getPasswordInputField().clear()
             .type(password)
     }
-    loginPage.getLoginButton().should('have.value', 'Login')
+    loginPage.getLoginButton().should('have.value', init.button_titles.LOGIN)
         .click()
 })
 
 When(`I {} the {} item to-from the cart`, (action, item_title) => {
     if (action === init.actions.ADD) {
-        inventoryPage.getItemButton(init.actions.ADD, item_title).should('have.text', 'Add to cart')
+        inventoryPage.getItemButton(init.actions.ADD, item_title).should('have.text', init.button_titles.ADD_TO_CART)
             .click()
     } else if (action === init.actions.REMOVE) {
-        inventoryPage.getItemButton(init.actions.REMOVE, item_title).should('have.text', 'Remove')
+        inventoryPage.getItemButton(init.actions.REMOVE, item_title).should('have.text', init.button_titles.REMOVE)
             .click()
     }
 })
@@ -68,40 +68,40 @@ When(`I open product page by clicking on {} and {} the {} item`, (link_type, act
         inventoryPage.getInventoryItemPicture(item_title).click()
     }
     if (action === init.actions.ADD) {
-        inventoryPage.getItemButton(init.actions.ADD, item_title).should('have.text', 'Add to cart')
+        inventoryPage.getItemButton(init.actions.ADD, item_title).should('have.text', init.button_titles.ADD_TO_CART)
             .click()
     } else if (action === init.actions.REMOVE) {
-        inventoryPage.getItemButton(init.actions.REMOVE, item_title).should('have.text', 'Remove')
+        inventoryPage.getItemButton(init.actions.REMOVE, item_title).should('have.text', init.button_titles.REMOVE)
             .click()
     }
     inventoryPage.getBackToProductsButton().click()
-    commonPage.getPageTitle().should('have.text', 'Products')
+    commonPage.getPageTitle().should('have.text', init.page_titles.PRODUCTS)
 })
 
 When(`I check the cart - Item name: {} , item description: {} , price: {} -  and {}`, (item_name, item_description, item_price, action) => {
     inventoryPage.getShoppingChartButton().click()
-    commonPage.getPageTitle().should('have.text', 'Your Cart')
+    commonPage.getPageTitle().should('have.text', init.page_titles.YOUR_CART)
     checkItem(item_name, item_description, item_price)
     if (action === init.actions.CHECK_OUT) {
         cartPage.getCheckOutButton().should('have.text', 'Checkout')
             .click()
     } else if (action === init.actions.REMOVE_ITEM) {
-        cartPage.getRemoveButton().should('have.text', 'Remove')
+        cartPage.getRemoveButton().should('have.text', init.button_titles.REMOVE)
             .click()
     } else if (action === init.actions.CONTINUE_SHOPPING) {
-        cartPage.getContinueButton().should('have.text', 'Continue Shopping')
+        cartPage.getContinueButton().should('have.text', init.button_titles.CONTINUE_SHOPPING)
             .click()
-        commonPage.getPageTitle('Products')
+        commonPage.getPageTitle(init.page_titles.PRODUCTS)
     }
 })
 
 Then(`I check the item overview - Item name: {} , item description: {} , price: {}`, (item_name, item_description, item_price) => {
-    commonPage.getPageTitle().should('have.text', 'Checkout: Overview')
+    commonPage.getPageTitle().should('have.text', init.page_titles.CHECKOUT_OVERVIEW)
     checkItem(item_name, item_description, item_price)
 })
 
 Then(`I check the payment overview - Item total: {} , tax: {} , total: {}`, (item_total, tax, total) => {
-    commonPage.getPageTitle().should('have.text', 'Checkout: Overview')
+    commonPage.getPageTitle().should('have.text', init.page_titles.CHECKOUT_OVERVIEW)
     checkOutOverviewPage.getItemTotal().should('have.text', item_total)
     checkOutOverviewPage.getSummaryTaxLabel().should('have.text', tax)
     checkOutOverviewPage.getSummaryTotal().should('have.text', total)
@@ -109,17 +109,17 @@ Then(`I check the payment overview - Item total: {} , tax: {} , total: {}`, (ite
 
 Then(`I open the cart and {}`, (action) => {
     inventoryPage.getShoppingChartButton().click()
-    commonPage.getPageTitle().should('have.text', 'Your Cart')
+    commonPage.getPageTitle().should('have.text', init.page_titles.YOUR_CART)
     if (action === init.actions.CHECK_OUT) {
         cartPage.getCheckOutButton().should('have.text', 'Checkout')
             .click()
     } else if (action === init.actions.REMOVE_ITEM) {
-        cartPage.getRemoveButton().should('have.text', 'Remove')
+        cartPage.getRemoveButton().should('have.text', init.button_titles.REMOVE)
             .click()
     } else if (action === init.actions.CONTINUE_SHOPPING) {
-        cartPage.getContinueButton().should('have.text', 'Continue Shopping')
+        cartPage.getContinueButton().should('have.text', init.button_titles.CONTINUE_SHOPPING)
             .click()
-        commonPage.getPageTitle('Products')
+        commonPage.getPageTitle(init.page_titles.PRODUCTS)
     }
 })
 
@@ -132,22 +132,22 @@ Then(`I check if the shopping cart badge shows {} selected element`, (number_of_
 })
 
 Then(`I fill the checkout form with first name {} , last name {} and postal code {} and {}`, (first_name, last_name, postal_code, action) => {
-    commonPage.getPageTitle().should('have.text', 'Checkout: Your Information')
+    commonPage.getPageTitle().should('have.text', init.page_titles.CHECKOUT_YOUR_INFORMATION)
     checkOutPage.getFirstNameField().type(first_name)
     checkOutPage.getLastNameField().type(last_name)
     checkOutPage.getPostalCodeField().type(postal_code)
     if (action === init.actions.CONTINUE) {
-        checkOutPage.getContinueButton().should('have.value', 'Continue')
+        checkOutPage.getContinueButton().should('have.value', init.button_titles.CONTINUE)
             .click()
     } else if (action === init.actions.CANCEL) {
-        commonPage.getCancelButton().should('have.text', 'Cancel')
+        commonPage.getCancelButton().should('have.text', init.button_titles.CANCEL)
             .click()
-        commonPage.getPageTitle('Your cart')
+        commonPage.getPageTitle(init.page_titles.YOUR_CART)
     }
 })
 
 Then(`I try to fill the checkout form with first name {} , last name {} and postal code {} and validate`, (first_name, last_name, postal_code) => {
-    commonPage.getPageTitle().should('have.text', 'Checkout: Your Information')
+    commonPage.getPageTitle().should('have.text', init.page_titles.CHECKOUT_YOUR_INFORMATION)
     if (first_name === 'NULL') {
         checkOutPage.getFirstNameField().clear()
     } else if (first_name !== 'NUL') {
@@ -166,14 +166,14 @@ Then(`I try to fill the checkout form with first name {} , last name {} and post
         checkOutPage.getPostalCodeField().clear()
             .type(postal_code)
     }
-    checkOutPage.getContinueButton().should('have.value', 'Continue').click()
-    commonPage.getPageTitle('Checkout: Your Information')
+    checkOutPage.getContinueButton().should('have.value', init.button_titles.CONTINUE).click()
+    commonPage.getPageTitle(init.page_titles.CHECKOUT_YOUR_INFORMATION)
 })
 
 Then(`I {} the checkout process`, (action) => {
-    commonPage.getPageTitle().should('have.text', 'Checkout: Overview')
-    if (action === 'finish') {
-        checkOutOverviewPage.getFinishButton().should('have.text', 'Finish').click()
+    commonPage.getPageTitle().should('have.text', init.page_titles.CHECKOUT_OVERVIEW)
+    if (action === init.actions.FINISH) {
+        checkOutOverviewPage.getFinishButton().should('have.text', init.button_titles.FINISH).click()
         commonPage.getPageTitle('Checkout: Complete!')
         checkOutCompletePage.getPonyExpressImage().should('be.visible', 'true')
         checkOutCompletePage.getComppleteHeader().should('have.text', 'THANK YOU FOR YOUR ORDER')
@@ -181,10 +181,10 @@ Then(`I {} the checkout process`, (action) => {
         checkOutCompletePage.getBackHomeImage().should('have.text', 'Back Home')
             .click()
     } else if (action === init.actions.CANCEL) {
-        commonPage.getCancelButton().should('have.text', 'Cancel')
+        commonPage.getCancelButton().should('have.text', init.button_titles.CANCEL)
             .click()
     }
-    commonPage.getPageTitle('Products')
+    commonPage.getPageTitle(init.page_titles.PRODUCTS)
 })
 
 Then(`I sort items by {}`, (order) => {

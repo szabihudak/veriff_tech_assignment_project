@@ -6,12 +6,30 @@ export class Init {
         CHECK_OUT: 'check out',
         CONTINUE: 'continue',
         CONTINUE_SHOPPING: 'continue shopping',
+        FINISH: 'finish',
         REMOVE: 'remove',
         REMOVE_ITEM: 'remove item'
+    }
+    button_titles = {
+        ADD_TO_CART: 'Add to cart',
+        CANCEL: 'Cancel',
+        CONTINUE: 'Continue',
+        CONTINUE_SHOPPING: 'Continue Shopping',
+        FINISH: 'Finish',
+        LOGIN: 'Login',
+        LOGOUT: 'Logout',
+        REMOVE: 'Remove',
+        RESET_APP_STATE: 'Reset App State'
     }
     link_type = {
         PICTURE: 'picture',
         TITLE: 'title',
+    }
+    page_titles = {
+        CHECKOUT_YOUR_INFORMATION: 'Checkout: Your Information',
+        CHECKOUT_OVERVIEW: 'Checkout: Overview',
+        YOUR_CART: 'Your Cart',
+        PRODUCTS: 'Products',
     }
     sorting_orders = {
         NAME_A_TO_Z: 'Name (A to Z)',

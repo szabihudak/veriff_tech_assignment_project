@@ -1,9 +1,9 @@
 Feature: Main FLows
 
-  Scenario: Happy FLow - User select/deselect innventory items and complete the check out process
+  Scenario: Happy FLow - User select/deselect inventory items and complete the check out process
     Given  I log in as standard_user user with secret_sauce password successful
     And    I check if the shopping cart badge shows 0 selected element
-    # Add/remove items to/from the cart from the intentory
+    # Add/remove items to/from the cart from the inventory
     When   I add the Sauce Labs Backpack item to-from the cart
     Then   I check if the shopping cart badge shows 1 selected element
     When   I add the Sauce Labs Fleece Jacket item to-from the cart
@@ -25,7 +25,7 @@ Feature: Main FLows
     Then   I finish the checkout process
 
 
-  Scenario: Alternative ways and cancelations during the checkout process
+  Scenario: Alternative ways and cancellations during the checkout process
     Given  I log in as standard_user user with secret_sauce password successful
     And    I check if the shopping cart badge shows 0 selected element
     When   I open product page by clicking on picture and back to product the Sauce Labs Bolt T-Shirt item
@@ -97,7 +97,7 @@ Feature: Main FLows
     Then  I check if error message Error: First Name is required appears
     When  I try to fill the checkout form with first name NULL , last name NULL and postal code 1108 and validate
     Then  I check if error message Error: First Name is required appears
-    When  I try to fill the checkout form with first name SzabolcsL , last name Hudak and postal code NULL and validate
+    When  I try to fill the checkout form with first name Szabolcs , last name Hudak and postal code NULL and validate
     Then  I check if error message Error: Postal Code is required appears
 
 
