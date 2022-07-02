@@ -53,6 +53,9 @@ npm run {related script}
 
 After the report creation you will find the BDD Cucumber HTML report in the ./reports/cucumber-html directory
 
+###Limitations
+The current Cypress version does not support Safari browser, test can run under Chrome, Firefox and Edge browsers. The browser needs to be installed.
+
 ###Bugs in the report
 Sorting is not working with problem_user
 
