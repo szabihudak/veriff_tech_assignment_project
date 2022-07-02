@@ -12,7 +12,6 @@
 - Scripts for test execution and reporting - ./package.json
 
 ###Install
-- cd payconiq_tech_assignment_project
 - Run 'npm install' for download and setup the necessary dependencies
 
 ###Test Execution
