@@ -9,7 +9,7 @@ export class CartPage {
     }
 
     getRemoveButton() {
-        return cy.get('#remove-sauce-labs-backpack')
+        return cy.get('button[id^="remove"]')
     }
 
 }

@@ -9,8 +9,7 @@ import {errorMessagesPage} from "../../support/PageObjects/ErrorMessagesPage"
 import {commonPage} from "../../support/PageObjects/CommonPage"
 
 import {testData} from "../../support/TestData"
-
-
+import {init} from "../../support/Init"
 
 
 before(function () {
@@ -19,14 +18,19 @@ before(function () {
 
 afterEach(function () {
     inventoryPage.getMenuButton().click({force: true})
-    inventoryPage.getResetAppMenuPoint().should('have.text', 'Reset App State').click({force: true})
-    inventoryPage.getLogoutMenuPoint().should('have.text', 'Logout').click({force: true})
+    inventoryPage.getResetAppMenuPoint().should('have.text', 'Reset App State')
+        .click({force: true})
+    inventoryPage.getLogoutMenuPoint().should('have.text', 'Logout')
+        .click({force: true})
 });
 
 Given(`I log in as {} user with {} password successful`, (user, password) => {
-    loginPage.getUserInputField().clear().type(user)
-    loginPage.getPasswordInputField().clear().type(password)
-    loginPage.getLoginButton().should('have.value', 'Login').click()
+    loginPage.getUserInputField().clear()
+        .type(user)
+    loginPage.getPasswordInputField().clear()
+        .type(password)
+    loginPage.getLoginButton().should('have.value', 'Login')
+        .click()
     commonPage.getPageTitle().should('have.text', 'Products')
 })
 
@@ -34,34 +38,41 @@ Given(`I try to log in as {} user with {} password`, (user, password) => {
     if (user === 'NULL') {
         loginPage.getUserInputField().clear()
     } else if (user !== 'NULL') {
-        loginPage.getUserInputField().clear().type(user)
+        loginPage.getUserInputField().clear()
+            .type(user)
     }
     if (password === 'NULL') {
         loginPage.getPasswordInputField().clear()
     } else if (password !== 'NULL') {
-        loginPage.getPasswordInputField().clear().type(password)
+        loginPage.getPasswordInputField().clear()
+            .type(password)
     }
-    loginPage.getLoginButton().should('have.value', 'Login').click()
+    loginPage.getLoginButton().should('have.value', 'Login')
+        .click()
 })
 
-When(`I {} the {} item to | from the cart`, (action, item_title) => {
-    if (action === 'add') {
-        inventoryPage.getItemButton('add', item_title).should('have.text', 'Add to cart').click()
-    } else if (action === 'remove') {
-        inventoryPage.getItemButton('remove', item_title).should('have.text', 'Remove').click()
+When(`I {} the {} item to-from the cart`, (action, item_title) => {
+    if (action === init.actions.ADD) {
+        inventoryPage.getItemButton(init.actions.ADD, item_title).should('have.text', 'Add to cart')
+            .click()
+    } else if (action === init.actions.REMOVE) {
+        inventoryPage.getItemButton(init.actions.REMOVE, item_title).should('have.text', 'Remove')
+            .click()
     }
 })
 
 When(`I open product page by clicking on {} and {} the {} item`, (link_type, action, item_title) => {
-    if (link_type === 'title') {
+    if (link_type === init.link_type.TITLE) {
         inventoryPage.getInventoryItemName(item_title).click()
-    } else if (link_type === 'picture') {
+    } else if (link_type === init.link_type.PICTURE) {
         inventoryPage.getInventoryItemPicture(item_title).click()
     }
-    if (action === 'add') {
-        inventoryPage.getItemButton('add', item_title).should('have.text', 'Add to cart').click()
-    } else if (action === 'remove') {
-        inventoryPage.getItemButton('remove', item_title).should('have.text', 'Remove').click()
+    if (action === init.actions.ADD) {
+        inventoryPage.getItemButton(init.actions.ADD, item_title).should('have.text', 'Add to cart')
+            .click()
+    } else if (action === init.actions.REMOVE) {
+        inventoryPage.getItemButton(init.actions.REMOVE, item_title).should('have.text', 'Remove')
+            .click()
     }
     inventoryPage.getBackToProductsButton().click()
     commonPage.getPageTitle().should('have.text', 'Products')
@@ -71,12 +82,15 @@ When(`I check the cart - Item name: {} , item description: {} , price: {} -  and
     inventoryPage.getShoppingChartButton().click()
     commonPage.getPageTitle().should('have.text', 'Your Cart')
     checkItem(item_name, item_description, item_price)
-    if (action === 'check out') {
-        cartPage.getCheckOutButton().should('have.text', 'Checkout').click()
-    } else if (action === 'remove item') {
-        cartPage.getRemoveButton().should('have.text', 'Remove').click()
-    } else if (action === 'continue shopping') {
-        cartPage.getContinueButton().should('have.text', 'Continue Shopping').click()
+    if (action === init.actions.CHECK_OUT) {
+        cartPage.getCheckOutButton().should('have.text', 'Checkout')
+            .click()
+    } else if (action === init.actions.REMOVE_ITEM) {
+        cartPage.getRemoveButton().should('have.text', 'Remove')
+            .click()
+    } else if (action === init.actions.CONTINUE_SHOPPING) {
+        cartPage.getContinueButton().should('have.text', 'Continue Shopping')
+            .click()
         commonPage.getPageTitle('Products')
     }
 })
@@ -96,12 +110,15 @@ Then(`I check the payment overview - Item total: {} , tax: {} , total: {}`, (ite
 Then(`I open the cart and {}`, (action) => {
     inventoryPage.getShoppingChartButton().click()
     commonPage.getPageTitle().should('have.text', 'Your Cart')
-    if (action === 'check out') {
-        cartPage.getCheckOutButton().should('have.text', 'Checkout').click()
-    } else if (action === 'remove item') {
-        cartPage.getRemoveButton().should('have.text', 'Remove').click()
-    } else if (action === 'continue shopping') {
-        cartPage.getContinueButton().should('have.text', 'Continue Shopping').click()
+    if (action === init.actions.CHECK_OUT) {
+        cartPage.getCheckOutButton().should('have.text', 'Checkout')
+            .click()
+    } else if (action === init.actions.REMOVE_ITEM) {
+        cartPage.getRemoveButton().should('have.text', 'Remove')
+            .click()
+    } else if (action === init.actions.CONTINUE_SHOPPING) {
+        cartPage.getContinueButton().should('have.text', 'Continue Shopping')
+            .click()
         commonPage.getPageTitle('Products')
     }
 })
@@ -119,10 +136,12 @@ Then(`I fill the checkout form with first name {} , last name {} and postal code
     checkOutPage.getFirstNameField().type(first_name)
     checkOutPage.getLastNameField().type(last_name)
     checkOutPage.getPostalCodeField().type(postal_code)
-    if (action === 'continue') {
-        checkOutPage.getContinueButton().should('have.value', 'Continue').click()
-    } else if (action === 'cancel') {
-        commonPage.getCancelButton().should('have.text', 'Cancel').click()
+    if (action === init.actions.CONTINUE) {
+        checkOutPage.getContinueButton().should('have.value', 'Continue')
+            .click()
+    } else if (action === init.actions.CANCEL) {
+        commonPage.getCancelButton().should('have.text', 'Cancel')
+            .click()
         commonPage.getPageTitle('Your cart')
     }
 })
@@ -132,17 +151,20 @@ Then(`I try to fill the checkout form with first name {} , last name {} and post
     if (first_name === 'NULL') {
         checkOutPage.getFirstNameField().clear()
     } else if (first_name !== 'NUL') {
-        checkOutPage.getFirstNameField().clear().type(first_name)
+        checkOutPage.getFirstNameField().clear()
+            .type(first_name)
     }
     if (last_name === 'NULL') {
         checkOutPage.getLastNameField().clear()
     } else if (last_name !== 'NUL') {
-        checkOutPage.getLastNameField().clear().type(last_name)
+        checkOutPage.getLastNameField().clear()
+            .type(last_name)
     }
     if (postal_code === 'NULL') {
         checkOutPage.getPostalCodeField().clear()
     } else if (postal_code !== 'NUL') {
-        checkOutPage.getPostalCodeField().clear().type(postal_code)
+        checkOutPage.getPostalCodeField().clear()
+            .type(postal_code)
     }
     checkOutPage.getContinueButton().should('have.value', 'Continue').click()
     commonPage.getPageTitle('Checkout: Your Information')
@@ -156,9 +178,11 @@ Then(`I {} the checkout process`, (action) => {
         checkOutCompletePage.getPonyExpressImage().should('be.visible', 'true')
         checkOutCompletePage.getComppleteHeader().should('have.text', 'THANK YOU FOR YOUR ORDER')
         checkOutCompletePage.getComppleteText().should('have.text', 'Your order has been dispatched, and will arrive just as fast as the pony can get there!')
-        checkOutCompletePage.getBackHomeImage().should('have.text', 'Back Home').click()
-    } else if (action === 'cancel') {
-        commonPage.getCancelButton().should('have.text', 'Cancel').click()
+        checkOutCompletePage.getBackHomeImage().should('have.text', 'Back Home')
+            .click()
+    } else if (action === init.actions.CANCEL) {
+        commonPage.getCancelButton().should('have.text', 'Cancel')
+            .click()
     }
     commonPage.getPageTitle('Products')
 })
@@ -177,15 +201,15 @@ Then(`I check if error message {} appears`, (error_message) => {
 
 Then(`I check the {} sort order`, (order) => {
     let reference_order
-    if (order === 'Name (Z to A)') reference_order = testData.getItemTitlesZtoA()
-    else if (order === 'Name (A to Z)') reference_order = testData.getItemTitlesAtoZ()
-    else if (order === 'Price (low to high)') reference_order = testData.getItemPricesLowtoHigh()
-    else if (order === 'Price (high to low)') reference_order = testData.getItemPricesHightoLow()
-    if (order === 'Price (low to high)' || order === 'Price (high to low)') {
+    if (order === init.sorting_orders.NAME_Z_TO_A) reference_order = testData.getItemTitlesZtoA()
+    else if (order === init.sorting_orders.NAME_A_TO_Z) reference_order = testData.getItemTitlesAtoZ()
+    else if (order === init.sorting_orders.PRICE_LOW_TO_HIGH) reference_order = testData.getItemPricesLowtoHigh()
+    else if (order === init.sorting_orders.PRICE_HIGH_TO_LOW) reference_order = testData.getItemPricesHightoLow()
+    if (order === init.sorting_orders.PRICE_LOW_TO_HIGH || order === init.sorting_orders.PRICE_HIGH_TO_LOW) {
         inventoryPage.getInventoryItemPriceList().each((element, index, list) => {
             expect(Cypress.$(element)).to.have.text(reference_order[index])
         })
-    } else if (order === 'Name (A to Z)' || order === 'Name (Z to A)') {
+    } else if (order === init.sorting_orders.NAME_A_TO_Z || order === init.sorting_orders.NAME_Z_TO_A) {
         inventoryPage.getInventoryItemTitleList().each((element, index, list) => {
             expect(Cypress.$(element)).to.have.text(reference_order[index])
         })
@@ -195,7 +219,7 @@ Then(`I check the {} sort order`, (order) => {
 
 function checkItem(item_name, item_description, item_price) {
     commonPage.getInventoryItemName().should('have.text', item_name)
-    commonPage.getInventoryItemDesction().should('have.text', item_description)
+    commonPage.getInventoryItemDesction().should('have.text', testData.getItemDescription(item_description))
     commonPage.getInventoryItemPrice().should('have.text', item_price)
 }
 
