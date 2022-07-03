@@ -5,13 +5,14 @@
 - Cucumber and Cucumber reporter for BDD Gherkin layer
 
 ###Project Structure
-- BDD Gherkin TC descriptions - ./integration/MainFlows.feature
-- Step definitions - ./integration/MainFlows/MainFlow.js
-- Page Object models - ./support/PageObjects/DocumentationPage.js
-- Test data - ./support/TestData.js
+- BDD Gherkin TC descriptions - ./cypress/integration/MainFlows.feature
+- Step definitions - ./cypress/integration/MainFlows/MainFlow.js
+- Page Object models - ./cypress/support/PageObjects/DocumentationPage.js
+- Test data - ./cypress/support/TestData.js
 - Scripts for test execution and reporting - ./package.json
 
 ###Install
+- Open the payconiq_tech_assignment_project
 - Run 'npm install' for download and setup the necessary dependencies
 
 ###Test Execution
@@ -44,14 +45,14 @@ npm run {related script}
 
     - Steps for test execution:
         - execute one test execution script, after that the reporting script. If you use execution scripts from the first group, before the report creation you have to close the browser instance which was opened during the test execution.
-            - for exampre:
+            - for example:
                 - npm run execute-on-edge
                 - npm run generate-html-report
         - or, use the scripts from the last group which will execute the tests and create the reports as well
-            - for exampre:
+            - for example:
                 - execute-on-chrome-report-cucumber
 
-After the report creation you will find the BDD Cucumber HTML report in the ./reports/cucumber-html directory
+After the report creation you will find the BDD Cucumber HTML report in the ./cypress/reports/cucumber-html directory
 
 ###Limitations
 The current Cypress version does not support Safari browser, test can run under Chrome, Firefox and Edge browsers. The browser needs to be installed.
