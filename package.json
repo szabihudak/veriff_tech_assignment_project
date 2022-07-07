@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "execute-on-chrome-detailed-report": "cypress run --browser chrome --headed --no-exit",
-    "execute-on-firefox-detsiled-report": "cypress run --browser firefox --headed --no-exit",
-    "execute-on-edge-detiled-report": "cypress run --browser edge --headed --no-exit",
     "execute-on-chrome": "cypress run --browser chrome --headed",
     "execute-on-firefox": "cypress run --browser firefox --headed",
     "execute-on-edge": "cypress run --browser edge --headed",

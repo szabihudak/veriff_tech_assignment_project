@@ -24,19 +24,19 @@ export class ConfigurationPage {
         return cy.get('span[class="Label-module_label__a_AEs"]:contains(' + title + ')')
     }
 
-    getHighLightedParagraphContent(number, title) {
+    getHighLightedParagraphContent(number) {
         return cy.get('dd').eq(Number(number)-1)
     }
 
-    getHighLightedParagraphContentFromIframe(number, title) {
+    getHighLightedParagraphContentFromIframe(number) {
         return cy.iframe().find('dd').eq(Number(number)-1)
     }
 
-    getHighLigthedSubTitle(number, title) {
+    getHighLigthedSubTitle(number) {
         return cy.get('dt').eq(Number(number)-1)
     }
 
-    getHighLigthedSubTitleFromIframe(number, title) {
+    getHighLigthedSubTitleFromIframe(number) {
         return cy.iframe().find('dt').eq(Number(number)-1)
     }
 
@@ -76,11 +76,11 @@ export class ConfigurationPage {
         return cy.get('[type="radio"][ value="' + value + '"]')
     }
 
-    getSubTitle(number) {
+    getSubTitle() {
         return cy.get('h2')
     }
 
-    getSubTitleFromIframe(number) {
+    getSubTitleFromIframe() {
         return cy.iframe().find('h2')
     }
 

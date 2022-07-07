@@ -1,18 +1,22 @@
-# Payconiq Tech Assignment Project
+# Veriff Tech Assignment Project
 
 ###Tech Stack
 - Cypress TA framework, JS
 - Cucumber and Cucumber reporter for BDD Gherkin layer
 
 ###Project Structure
-- BDD Gherkin TC descriptions - ./cypress/integration/MainFlows.feature
-- Step definitions - ./cypress/integration/MainFlows/MainFlow.js
-- Page Object models - ./cypress/support/PageObjects/DocumentationPage.js
+- BDD Gherkin TC descriptions 
+  - ./cypress/integration/APITests.feature
+  - ./cypress/integration/UITests.feature
+- Step definitions 
+  - ./cypress/integration/APITests/APITests.js
+  - ./cypress/integration/UITests/UITests.js
+- Page Object models - ./cypress/support/PageObjects/ConfigurationPage.js (I created only one POM (there is no separate POM for Welcome page)
 - Test data - ./cypress/support/TestData.js
 - Scripts for test execution and reporting - ./package.json
 
 ###Install
-- Open the payconiq_tech_assignment_project
+- Open the veriff_tech_assignment_project
 - Run 'npm install' for download and setup the necessary dependencies
 
 ###Test Execution
@@ -20,10 +24,6 @@ Run the following scripts form package.json or from terminal using the following
 npm run {related script}
 
 - Scripts for test execution:
-    - execution with opened browser / detailed test steps
-        - execute-on-chrome-detailed-report
-        - execute-on-firefox-detsiled-report
-        - execute-on-edge-detiled-report
 
     - execution with opened browser
         - execute-on-chrome
@@ -44,7 +44,7 @@ npm run {related script}
         - execute-on-edge-report-cucumber
 
     - Steps for test execution:
-        - execute one test execution script, after that the reporting script. If you use execution scripts from the first group, before the report creation you have to close the browser instance which was opened during the test execution.
+        - execute one test execution script, after that the reporting script.
             - for example:
                 - npm run execute-on-edge
                 - npm run generate-html-report
@@ -55,17 +55,14 @@ npm run {related script}
 After the report creation you will find the BDD Cucumber HTML report in the ./cypress/reports/cucumber-html directory
 
 ###Limitations
-The current Cypress version does not support Safari browser, test can run under Chrome, Firefox and Edge browsers. The browser needs to be installed.
+The current Cypress version does not support Safari browser, test can run under Chrome, Firefox and Edge browsers. The browsers need to be installed.
 
-###Bugs in the report
-Sorting is not working with problem_user
+###Bugs in the report and approach
+- API Tests: 
+  - I call the 2 APIs with inappropriate values as well, and I expect "normal" responses. In this way I would like to show how the failed test cases appear in the cucumber test report. So there will be 3 failed test cases as well.
+  - I don't check the whole response object, just the most significant field values which are present in the request bodies as well.
+- UI Tests: I could catch the 404 Error message in case of selecting Residence Permit :) , so there will be one failed TC (with screenshot) in this report as well
 
-###Test Approach
 
-I tried to cover most part of the application with max 5 automated test cases, so I defined E2E user flows which go through the application, insted of testing each part/page separately. These flows, test cases are:
- - Happy Flow - User select/deselect inventory items and complete the checkout process. With this test case I check if the main functionality of the application is working as we expected.
- - Alternative ways and cancellations during the checkout process. I chose state transition test design methodology, to walk through every possible state transition of the application, and chek if it is working.
- - Sorting in the inventory. I defined separate test case for sorting on the inventory page, this is not a mandatory part of the checkout flow. Here I test with different kind of users, to check if everything can work as expected for each user.
- - Error handling and validations. Separate test for error handling and validations
- - Basic functionalities such as login, logout, reset application were tested as a part of other tests
+
  
