@@ -1,103 +1,92 @@
 Feature: Main FLows
 
-  Scenario: Happy Flow - User select/deselect inventory items and complete the checkout process
-    Given  I log in as standard_user user with secret_sauce password successful
-    And    I check if the shopping cart badge shows 0 selected element
-    # Add/remove items to/from the cart from the inventory
-    When   I add the Sauce Labs Backpack item to-from the cart
-    Then   I check if the shopping cart badge shows 1 selected element
-    When   I add the Sauce Labs Fleece Jacket item to-from the cart
-    Then   I check if the shopping cart badge shows 2 selected element
-    When   I remove the Sauce Labs Fleece Jacket item to-from the cart
-    Then   I check if the shopping cart badge shows 1 selected element
+  Scenario: Configure Veriff redirect
+    Given I check is the page title is Welcome to our Veriff Demo
+    When  I set Test User Spanish as a full name
+    And   I set Español (España) as language
+    And   I set Zimbabwe as document country
+    And   I set Driver's license as document type
+    And   I set redirect as Launch Veriff via
+    Then  I click on Veriff Me button on page
+    And   I check the content of the title is Vamos a verificarte on page
+    And   I check the content of the sub title is Escanee el código QR on page
+    And   I check the content of the paragraph is Escanea el código QR con la cámara de tu móvil on page
+    And   I check if the content of the 1. highligthed sub title is Prepara un documento válido on page
+    And   I check if the content of the 1. highligthed paragraph is Asegúrate de que no ha expirado o esté dañado on page
+    And   I check if the content of the 2. highligthed sub title is Utiliza un smartphone on page
+    And   I check if the content of the 2. highligthed paragraph is Necesitas un smartphone para continuar on page
+    And   I check if QR Code appeares on page
+    And   I check the content of the title is Vamos a verificarte on page
+    And   I click on Continuar con este dispositivo button on page
+    And   I see Iniciar sesión button on page
 
-    # Add/remove items from item's page, opened by clicking on the title/picture of the item
-    When   I open product page by clicking on picture and add the Sauce Labs Bolt T-Shirt item
-    Then   I check if the shopping cart badge shows 2 selected element
-    When   I open product page by clicking on title and remove the Sauce Labs Bolt T-Shirt item
-    Then   I check if the shopping cart badge shows 1 selected element
+  Scenario: Check the UI elements on the Welcome Page
+    Given I check is the page title is Welcome to our Veriff Demo
+    When  I check the content of the paragraph is Veriff helps you connect with honest customers. Test out our flow by filling in the following information: on page
+    And   I check the title of the Full Name label
+    And   I check the title of the Session Language label
+    And   I check the title of the Document Country label
+    And   I check the title of the Document Type label
+    And   I check the title of the Launch Veriff via (browser only) label
+    And   I check the content of the paragraph is this session you consent that your audio, video and technical information may be recorded and processed for the purposes of testing Veriff’s verification flow. on page
+    Then  I see full name field
+    And   I see session language filed
+    And   I see the document country field
+    And   I see the document type field
+    And   I see incontext radio button
+    And   I see redirect radio button
 
-    # Check the content of the cart, fill the checkout form and finalize the checkout process
-    When   I check the cart - Item name: Sauce Labs Backpack , item description: item_description_sauce_labs_backpack , price: $29.99 -  and check out
-    And    I fill the checkout form with first name Szabolcs , last name Hudak and postal code 1108 and continue
-    And    I check the item overview - Item name: Sauce Labs Backpack , item description: item_description_sauce_labs_backpack , price: $29.99
-    And    I check the payment overview - Item total: Item total: $29.99 , tax: Tax: $2.40 , total: Total: $32.39
-    Then   I finish the checkout process
-
-
-  Scenario: Alternative ways and cancellations during the checkout process
-    Given  I log in as standard_user user with secret_sauce password successful
-    And    I check if the shopping cart badge shows 0 selected element
-    When   I open product page by clicking on picture and back to product the Sauce Labs Bolt T-Shirt item
-    Then   I check if the shopping cart badge shows 0 selected element
-    When   I open product page by clicking on title and back to product the Sauce Labs Fleece Jacket item
-    Then   I check if the shopping cart badge shows 0 selected element
-    When   I add the Sauce Labs Onesie item to-from the cart
-    Then   I check if the shopping cart badge shows 1 selected element
-    When   I open the cart and continue shopping
-    And    I check if the shopping cart badge shows 1 selected element
-    When   I open the cart and remove item
-    And    I open the cart and continue shopping
-    Then   I check if the shopping cart badge shows 0 selected element
-    When   I add the Sauce Labs Onesie item to-from the cart
-    And    I check if the shopping cart badge shows 1 selected element
-    And    I open the cart and check out
-    Then   I check if the shopping cart badge shows 1 selected element
-    When   I fill the checkout form with first name Szabolcs , last name Hudak and postal code 1108 and cancel
-    And    I check if the shopping cart badge shows 1 selected element
-    And    I open the cart and continue shopping
-    And    I open the cart and check out
-    And    I fill the checkout form with first name Szabolcs , last name Hudak and postal code 1108 and continue
-    And    I cancel the checkout process
-    Then   I check if the shopping cart badge shows 1 selected element
-
-
-  Scenario Outline: Sorting in the the inventory
-    #Besides testing the sorting of inventory, we test how inventory behaves with different kind of users
-    Given I log in as <user_name> user with <password> password successful
-    When  I sort items by Price (low to high)
-    Then  I check the Price (low to high) sort order
-    When  I sort items by Price (high to low)
-    Then  I check the Price (high to low) sort order
-    When  I sort items by Name (Z to A)
-    Then  I check the Name (Z to A) sort order
-    When  I sort items by Name (A to Z)
-    Then  I check the Name (A to Z) sort order
+  Scenario Outline: Configure Veriff incontext - variations
+    Given I check is the page title is Welcome to our Veriff Demo
+    When  I set <user_name> as a full name
+    And   I set <language> as language
+    And   I set <document_country> as document country
+    And   I set <document_type> as document type
+    And   I set <veriff_via> as Launch Veriff via
+    Then  I click on Veriff Me button on page
+    And   I check the content of the title is Let's get you verified on iframe
+    And   I check the content of the sub title is Scan the QR code on iframe
+    And   I check the content of the paragraph is Scan the QR code with your camera app on iframe
+    And   I check if the content of the 1. highligthed sub title is Prepare a valid document on iframe
+    And   I check if the content of the 1. highligthed paragraph is Make sure it's not expired or physically damaged on iframe
+    And   I check if the content of the 2. highligthed sub title is Use a smartphone on iframe
+    And   I check if the content of the 2. highligthed paragraph is You need a smartphone in order to continue on iframe
+    And   I check if QR Code appeares on iframe
+    And   I click on Continue with your current device button on iframe
+    And   I see Start session button on iframe
     Examples:
-      | user_name               | password     |
-      | standard_user           | secret_sauce |
-      | problem_user            | secret_sauce |
+      | user_name                  | language | document_country | document_type    | veriff_via |
+      | Test User Passport         | English  | Algeria          | Passport         | incontext  |
+      | Test User ID Card          | English  | Benin            | ID Card          | incontext  |
+      | Test User RP               | English  | Guatemala        | Residence Permit | incontext  |
+      | Test User Driver's License | English  | Benin            | Driver's license | incontext  |
+
+  Scenario: Configure Veriff incontext - Cancelation
+    Given I check is the page title is Welcome to our Veriff Demo
+    When  I set Test User English as a full name
+    And   I set English as language
+    And   I set Algeria as document country
+    And   I set Passport as document type
+    And   I set incontext as Launch Veriff via
+    Then  I click on Veriff Me button on page
+    And   I check the content of the title is Let's get you verified on iframe
+    And   I check the content of the sub title is Scan the QR code on iframe
+    And   I check the content of the paragraph is Scan the QR code with your camera app on iframe
+    And   I check if the content of the 1. highligthed sub title is Prepare a valid document on iframe
+    And   I check if the content of the 1. highligthed paragraph is Make sure it's not expired or physically damaged on iframe
+    And   I check if the content of the 2. highligthed sub title is Use a smartphone on iframe
+    And   I check if the content of the 2. highligthed paragraph is You need a smartphone in order to continue on iframe
+    And   I check if QR Code appeares on iframe
+    And   I check the content of the title is Let's get you verified on iframe
+    And   I close the iframe
+    And   I click on Verify me button on iframe
+    And   I check the content of the title is Let's get you verified on iframe
+    And   I close the iframe
+    And   I click on Exit link on iframe
+    And   I reload page
+    And   I check is the page title is Welcome to our Veriff Demo
 
 
-  Scenario: Error handling and validations
-    #Check the validations on the login page
-    Given I try to log in as NULL user with NULL password
-    And   I check if error message Epic sadface: Username is required appears
-    When  I try to log in as standard_user user with NULL password
-    Then  I check if error message Epic sadface: Password is required appears
-    When  I try to log in as NULL user with secret_sauce password
-    Then  I check if error message Epic sadface: Username is required appears
-    When  I try to log in as standard_user user with asdf password
-    Then  I check if error message Epic sadface: Username and password do not match any user in this service appears
-    When  I try to log in as standard_user_2 user with secret_sauce password
-    Then  I check if error message Epic sadface: Username and password do not match any user in this service appears
-    When  I try to log in as locked_out_user user with secret_sauce password
-    Then  I check if error message Epic sadface: Sorry, this user has been locked out. appears
-    And   I wait 3 sec
-    When  I log in as standard_user user with secret_sauce password successful
-    And   I open the cart and check out
-
-    #Check the validations on the checkout form page
-    And   I try to fill the checkout form with first name NULL , last name NULL and postal code NULL and validate
-    Then  I check if error message Error: First Name is required appears
-    When  I try to fill the checkout form with first name Szabolcs , last name NULL and postal code NULL and validate
-    Then  I check if error message Error: Last Name is required appears
-    When  I try to fill the checkout form with first name NULL , last name Hudak and postal code NULL and validate
-    Then  I check if error message Error: First Name is required appears
-    When  I try to fill the checkout form with first name NULL , last name NULL and postal code 1108 and validate
-    Then  I check if error message Error: First Name is required appears
-    When  I try to fill the checkout form with first name Szabolcs , last name Hudak and postal code NULL and validate
-    Then  I check if error message Error: Postal Code is required appears
 
 
 
