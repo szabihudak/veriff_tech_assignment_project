@@ -12,7 +12,10 @@
     "generate-html-report": "node cucumber_html_generator.js",
     "execute-on-chrome-report-cucumber": "npm-run-all -s -c execute-on-chrome generate-html-report",
     "execute-on-firefox-report-cucumber": "npm-run-all -s -c execute-on-firefox generate-html-report",
-    "execute-on-edge-report-cucumber": "npm-run-all -s -c execute-on-edge generate-html-report"
+    "execute-on-edge-report-cucumber": "npm-run-all -s -c execute-on-edge generate-html-report",
+    "execute-on-chrome-headless-report-cucumber": "npm-run-all -s -c execute-on-chrome-headless generate-html-report",
+    "execute-on-firefox-headless-report-cucumber": "npm-run-all -s -c execute-on-firefox-headless generate-html-report",
+    "execute-on-edge-headless-report-cucumber": "npm-run-all -s -c execute-on-edge-headless generate-html-report"
   },
   "keywords": [],
   "author": "",

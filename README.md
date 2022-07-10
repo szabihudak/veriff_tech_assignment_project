@@ -42,6 +42,9 @@ npm run {related script}
         - execute-on-chrome-report-cucumber
         - execute-on-firefox-report-cucumber
         - execute-on-edge-report-cucumber
+        - execute-on-chrome-headless-report-cucumber
+        - execute-on-firefox-headless-report-cucumber
+        - execute-on-edge-headless-report-cucumber
 
     - Steps for test execution:
         - execute one test execution script, after that the reporting script.
