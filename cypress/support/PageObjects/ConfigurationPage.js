@@ -16,6 +16,14 @@ export class ConfigurationPage {
         return cy.iframe().find('button[aria-label="Exit"]')
     }
 
+    getButtonWithDocumentImage(document_type) {
+        return cy.iframe().get('div[data-test-document-type="' + document_type + '"]')
+    }
+
+    getButtonWithDocumentImageFromIframe(document_type) {
+        return cy.iframe().find('div[data-test-document-type="' + document_type + '"]')
+    }
+
     getFieldByName(name) {
         return cy.get('[name="' + name + '"]')
     }
@@ -56,12 +64,12 @@ export class ConfigurationPage {
         return cy.get('h3[class="text-center m-b"]')
     }
 
-    getParagraphContent(title) {
-        return cy.get('p:contains(' + title + ')')
+    getParagraphContent(content) {
+        return cy.get('p:contains(' + content + ')')
     }
 
-    getParagraphContentFromIframe(title) {
-        return cy.iframe().find('p:contains(' + title + ')')
+    getParagraphContentFromIframe(content) {
+        return cy.iframe().find('p:contains(' + content + ')')
     }
 
     getQRCode() {

@@ -13,17 +13,19 @@ afterEach(function () {
 });
 
 Given(`I check the title of the {} label`, (title) => {
-    configurationPage.getFieldTitle(name)
+    configurationPage.getFieldTitle(title)
 })
 
-Given(`I check is the page title is {}`, (page_title) => {
+Given(`I check is the page title is "{}"`, (page_title) => {
     configurationPage.getPageTitle().should('be.visible')
         .should('have.text', page_title)
 })
 
 When(`I set {} as a full name`, (full_name) => {
-    configurationPage.getFieldByName(init.field_names.NAME).clear()
-        .type(full_name)
+    if (full_name !== 'NULL') {
+        configurationPage.getFieldByName(init.field_names.NAME).clear()
+            .type(full_name)
+    }
 })
 
 Given(`I see full name field`, () => {
@@ -31,8 +33,10 @@ Given(`I see full name field`, () => {
 })
 
 When(`I set {} as language`, (language) => {
-    configurationPage.getFieldByName(init.field_names.LANGUAGE).click()
-    configurationPage.getListItem(language).click({force: true})
+    if (language !== 'NULL') {
+        configurationPage.getFieldByName(init.field_names.LANGUAGE).click()
+        configurationPage.getListItem(language).click({force: true})
+    }
 })
 
 Given(`I see session language filed`, () => {
@@ -40,8 +44,10 @@ Given(`I see session language filed`, () => {
 })
 
 When(`I set {} as document country`, (document_country) => {
-    configurationPage.getFieldByName(init.field_names.DOCUMNET_COUNTRY).click()
-    configurationPage.getListItem(document_country).click({force: true})
+    if (document_country !== 'NULL') {
+        configurationPage.getFieldByName(init.field_names.DOCUMNET_COUNTRY).click()
+        configurationPage.getListItem(document_country).click({force: true})
+    }
 })
 
 Given(`I see the document country field`, () => {
@@ -50,8 +56,10 @@ Given(`I see the document country field`, () => {
 })
 
 When(`I set {} as document type`, (document_type) => {
-    configurationPage.getFieldByName(init.field_names.DOCUMNET_TYPE).click()
-    configurationPage.getListItem(document_type).click({force: true})
+    if (document_type !== 'NULL') {
+        configurationPage.getFieldByName(init.field_names.DOCUMNET_TYPE).click()
+        configurationPage.getListItem(document_type).click({force: true})
+    }
 })
 
 Given(`I see the document type field`, () => {
@@ -68,9 +76,9 @@ Given(`I see {} radio button`, (launch_type) => {
 
 Then(`I click on {} button on {}`, (title, source) => {
     if (source === init.source.PAGE) {
-        configurationPage.getButtonByTitle(title).click({force: true})
+        configurationPage.getButtonByTitle(title).should('be.enabled').click({force: true})
     } else if (source === init.source.IFRAME) {
-        configurationPage.getButtonByTitleFromIframe(title).click({force: true})
+        configurationPage.getButtonByTitleFromIframe(title).should('be.enabled').click({force: true})
     }
 })
 
@@ -80,9 +88,9 @@ Given(`I reload page`, () => {
 
 Then(`I see {} button on {}`, (title, source) => {
     if (source === init.source.PAGE) {
-        configurationPage.getButtonByTitle(title).should('be.visible','true')
+        configurationPage.getButtonByTitle(title).should('be.visible', 'true')
     } else if (source === init.source.IFRAME) {
-        configurationPage.getButtonByTitleFromIframe(title).should('be.visible','true')
+        configurationPage.getButtonByTitleFromIframe(title).should('be.visible', 'true')
     }
 })
 
@@ -98,6 +106,18 @@ Then(`I click on {} link on {}`, (title, source) => {
     }
 })
 
+Then(`I click on {} button with ID's image on {}`, (image_type, source) => {
+    if (source === init.source.PAGE) {
+        configurationPage.getButtonWithDocumentImage(image_type).should('be.visible')
+            .invoke('attr', 'target', '_self')
+            .click({force: true})
+    } else if (source === init.source.IFRAME) {
+        configurationPage.getButtonWithDocumentImageFromIframe(image_type).should('be.visible')
+            .invoke('attr', 'target', '_self')
+            .click({force: true})
+    }
+})
+
 Given(`I close the {}`, (source) => {
     if (source === init.source.PAGE) {
         configurationPage.getCloseButton().click()
@@ -107,24 +127,24 @@ Given(`I close the {}`, (source) => {
 })
 
 
-Then(`I check the content of the {} is {} on {}`, (content_type, content, source) => {
+Then(`I check the content of the {} is "{}" on {}`, (content_type, content, source) => {
     let content_to_check
     switch (content_type) {
-        case 'title':
+        case init.ui_text_element_types.TITLE :
             if (source === init.source.PAGE) {
                 content_to_check = configurationPage.getTitle()
             } else if (source === init.source.IFRAME) {
                 content_to_check = configurationPage.getTitleFromIframe()
             }
             break
-        case 'sub title':
+        case init.ui_text_element_types.SUB_TITLE :
             if (source === init.source.PAGE) {
                 content_to_check = configurationPage.getSubTitle()
             } else if (source === init.source.IFRAME) {
                 content_to_check = configurationPage.getSubTitleFromIframe()
             }
             break
-        case 'paragraph':
+        case init.ui_text_element_types.PARAGRAPH :
             if (source === init.source.PAGE) {
                 content_to_check = configurationPage.getParagraphContent(content)
             } else if (source === init.source.IFRAME) {
@@ -137,21 +157,21 @@ Then(`I check the content of the {} is {} on {}`, (content_type, content, source
         .should('have.text', content)
 })
 
-Then(`I check if the content of the {}. {} is {} on {}`, (number, content_type, content, source) => {
+Then(`I check if the content of the {}. {} is "{}" on {}`, (number, content_type, content, source) => {
     let content_to_check
     switch (content_type) {
-        case 'highligthed sub title':
+        case init.ui_text_element_types.HIGHLIGTHED_SUB_TITLE :
             if (source === init.source.PAGE) {
-                content_to_check = configurationPage.getHighLigthedSubTitle(number, content)
+                content_to_check = configurationPage.getHighLigthedSubTitle(number)
             } else if (source === init.source.IFRAME) {
-                content_to_check = configurationPage.getHighLigthedSubTitleFromIframe(number, content)
+                content_to_check = configurationPage.getHighLigthedSubTitleFromIframe(number)
             }
             break
-        case 'highligthed paragraph':
+        case init.ui_text_element_types.HIGHLIGHTED_PARAGRAPH :
             if (source === init.source.PAGE) {
-                content_to_check = configurationPage.getHighLightedParagraphContent(number, content)
+                content_to_check = configurationPage.getHighLightedParagraphContent(number)
             } else if (source === init.source.IFRAME) {
-                content_to_check = configurationPage.getHighLightedParagraphContentFromIframe(number, content)
+                content_to_check = configurationPage.getHighLightedParagraphContentFromIframe(number)
             }
             break
     }
@@ -160,7 +180,7 @@ Then(`I check if the content of the {}. {} is {} on {}`, (number, content_type, 
         .should('have.text', content)
 })
 
-Then('I check if QR Code appeares on {}', (language, source) => {
+Then('I check if QR Code appeares on {}', (source) => {
     if (source === init.source.PAGE) {
         configurationPage.getQRCode().should('be.visible', 'true')
     } else if (source === init.source.IFRAME) {

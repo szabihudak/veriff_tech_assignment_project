@@ -11,7 +11,7 @@
 - Step definitions 
   - ./cypress/integration/APITests/APITests.js
   - ./cypress/integration/UITests/UITests.js
-- Page Object models - ./cypress/support/PageObjects/ConfigurationPage.js (I created only one POM (there is no separate POM for Welcome page)
+- Page Object models - ./cypress/support/PageObjects/ConfigurationPage.js. I created only one POM (there is no separate POM for Welcome page)
 - Test data - ./cypress/support/TestData.js
 - Scripts for test execution and reporting - ./package.json
 
@@ -25,7 +25,7 @@ npm run {related script}
 
 - Scripts for test execution:
 
-    - execution with opened browser
+    - execution in headed mode
         - execute-on-chrome
         - execute-on-firefox
         - execute-on-edge
